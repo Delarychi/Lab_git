@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+  <link rel="manifest" href="./icons/site.webmanifest">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+  <title>MosExspro</title>
+</head>
+<body class="mainBody">
+  <header class="main-info">
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="images/logo.png" style="width: 50px;" class="me-2 logotype" alt="Логотип">
+          Туры по Москве
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mx-2">
+            <li class="nav-item aсtive-link">
+              <a class="nav-link" href="#tour">Экскурсии</a>
+            </li>
+            <li class="nav-item aсtive-link">
+              <a class="nav-link" href='homepage.html'>Личный кабинет</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <div class="alertss">
+        <div class="alert alert-primary alert-dismissible">
+          0 новых сообщений
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    <section class="container p-4 main-info">
+      <div class="row">
+        <div class="col-12 col-lg-6 text-center">
+          <img class="w-50" src="images/logo2.png"  alt="img company">
+        </div> 
+        <div class="col-12 col-lg-6 text-center my-5">
+          <h2>Компания MosExspro</h2>
+          <p>Компания MosExspro занимается поиском и проведением экскурсий по Москве на 
+            разных языках. Мы можем предложить вам посетить самые популярные маршруты 
+            в удобное для вас время с 9:00 до 23:00, работаем даже в выходные и по праздникам.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="container py-3 text-center gx-2">
+      <h2>MosExspro в цифрах</h2>
+      <div class="row mt-4">
+        <div class="col-md">
+          <img src="images/marker3.png" style="width: 70px;" alt="marker">
+          <br> 
+          <h4><strong>Проведенные экскурсии</strong></h4>
+          <p>За 2023 год мы провели <strong>около 10.000 экскурсий</strong> с самыми 
+            разнообразными маршрутами, которые посетили туристы 
+            из <strong>более 50 стран</strong>.</p>
+        </div>
+        <div class="col-md">
+          <img src="images/marker2.png" style="width: 70px;" alt="marker">
+          <br> 
+          <h4><strong>Экскурсоводы</strong></h4>
+          <p>Наши экскурсоводы - настоящие специалисты своего дела,
+            они обладают обширными знаниями по краеведению, истории и искусству. 
+            Любой человек из нашей команды, состоящей из <strong>43 экскурсоводов</strong>, 
+            с радостью ответит на все ваши вопросы после экскурсии.
+          </p>
+        </div>
+        <div class="col-md">
+          <img src="images/marker1.png" style="width: 70px;" alt="marker">
+          <br> 
+          <h4><strong>Маршруты</strong></h4>
+          <p>Количество наших <strong>маршрутов</strong> к концу 2023 года 
+            стало равно <strong>67</strong>, и мы продолжаем увеличивать их количество, чтобы 
+            туристы точно могли найти что-то на свой вкус.</p>
+        </div>
+      </div>
+    </section>
+    <section class="container pb-5 text-center">
+      <h2>Карта</h2>
+      <div class="w-100 mainMap" id="mainMap"></div> 
+    </section>
+    <section id='routes' class="container mt-3">
+      <h3>Доступные маршруты</h3> 
+      <form class="mb-3" onsubmit="searchRoutes()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="routeNameInput" class="form-label">Название маршрута</label>
+            <input type="text" class="form-control" id="routeNameInput" placeholder="Введите название маршрута">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="mainObjectSelect" class="form-label">Выберите объект</label>
+          <select class="form-control" id="mainObjectSelect">
+            <option value="" disabled selected>Выберите основную достопримечательность</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Найти маршрут</button> 
+      <button type="button" class="btn btn-secondary" onclick="resetSearch()">Сбросить</button>
+    </form>
+    <table class="table table-bordered table-striped text-center info-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Название</th>
+          <th>Описание</th>
+          <th>Основные объекты</th>
+          <th>Выбрать</th>
+        </tr>
+        </thead>
+      <tbody id="routesTableBody"></tbody>
+    </table>
+    <ul class="pagination" id="pagination"></ul>
+    </section>
+    <section class="guide-choise container my-5 ">
+      <h3>Доступные гиды по маршруту </h3>
+      <div class="selected-route">
+      </div>
+      <div class="row">
+          <div class="col-6 col-lg-4 ">
+              <select name="guide-lang" id="selectedLanguge" class="option">
+                  <option value="">Язык экскурсии</option>
+              </select>
+          </div>
+          <div class="col-6 col-lg-4">
+              Опыт работы:
+              <input type="number" id="guideFromExperiense" placeholder="от" class="option w-25">
+              <input type="number" id="guideToExperiense" placeholder="до" class="option w-25">
+          </div>
+      </div>
+      <table class="table table-bordered mt-3 info-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Языки</th>
+            <th scope="col">Опыт работы</th>
+            <th scope="col">Стоимость услуг в час</th>
+            <th scope="col">Выбрать</th>
+          </tr>
+        </thead>
+        <tbody id="guideTable"></tbody>
+      </table>
+  </section>
+  </main>
+  <footer class="py-4 text-center main-info">
+    <p>Хлюстова Екатерина Алексеевна 221-365</p>
+    <p>Телефон: +7(919)305-59-70</p>
+    <p>Почта: Khluystova@mail.ru</p>
+  </footer>
+  <div id="orderModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="showModalLabel">Отправить заявку</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+              <div class="col-3">
+                <label for="guideFullName" class="form-label">ФИО гида:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" class="form-control" id="guideFullName" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+            <div class="col-3">
+                <label for="routeName" class="form-label">Название маршрута:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" class="form-control" id="routeName" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="date" class="form-label">Дата экскурсии:</label>
+              </div>
+              <div class="col-9">
+                <input type="date" class="form-control" id="date" min="2024-01-01" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="startTime" class="form-label">Время начала:</label>
+              </div>
+              <div class="col-9">
+                <input type="time" class="form-control" id="startTime" min="09:00" max="23:00" step="1800" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="orderDuration" class="form-label">Длительность экскурсии:</label>
+              </div>
+              <div class="col-9">
+                <select class="form-control" id="orderDuration" >
+                  <option value="1">1 час</option>
+                  <option value="2">2 часа</option>
+                  <option value="3">3 часа</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="personsCount" class="form-label">Количество человек в группе:</label>
+              </div>
+              <div class="col-9">
+                <input type="number" class="form-control" id="personsCount" min="1" max="20">
+              </div>
+            </div>
+            <div id='additionsBlock'>
+              <h2>Дополнительные опции:</h2>
+              <div class="row mb-3">
+                <div class="col-1">
+                  <input id="isStudent" type="checkbox" />
+                </div>
+                <div class="col-11">
+                  <label for="isStudent" class="form-label">
+                    <strong>Скидка для школьников и студентов</strong>
+                    <p>Скидка предоставляется только для школьников и студентов.</p>
+                    <p class='text-danger'>-15 %</p>
+                  </label>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-1">
+                  <input id="isTransport" type="checkbox" />
+                </div>
+                <div class="col-11">
+                  <label for="isTransport" class="form-label">
+                    <strong>Трансфер до ближайших станций метро после экскурсии. </strong>
+                    <p>Увеличивает стоимость на
+                      25% в выходные дни и на 30% в будние.</p>
+                    <p class='text-danger' id='priceInput'></p>
+                  </label>
+                </div>
+              </div>
+            <div class="row mb-3">
+              <div class="col-5">
+                <label for="price" class="form-label">Итоговая стоимость:</label>
+              </div>
+              <div class="col-7">
+                <strong id='price'>0 рублей.</strong>
+              </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button id="sendData" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Отправить</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://mapgl.2gis.com/api/js/v1"></script>
+  <script>
+    const map = new mapgl.Map('mainMap', {
+      center: [37.6156,	55.7522],
+      zoom: 20,
+      key: '0450e79e-4ef9-4dd5-a04b-269f4e8d15e6',
+    });
+
+    const marker = new mapgl.Marker(map, {
+      coordinates: [37.6156, 55.7522],
+    });
+  </script>
+</body>
+</html>

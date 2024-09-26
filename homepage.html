@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>ORGNAME</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="images/logo.png" alt="Логотип" class="me-2">
+          Туры по Москве
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mx-2">
+            <li class="nav-item">
+              <a class="nav-link" href="#tour">Экскурсии</a>
+            </li>
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">Поиск маршрутов</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <div class="alertss">
+        <div class="alert" alert-primary alert-dismissible>
+          0 новых сообщений
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    <section id='routes' class="container mt-3">
+      <h3>Оставленные заявки</h3> 
+      <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th>№</th>
+            <th>Название маршрута</th>
+            <th>Дата</th>
+            <th>Стоимость</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="ordersTable"></tbody>
+      </table>
+      <ul class="pagination" id="pagination"></ul>
+    </section>
+  </main>
+  <footer class="py-5 text-center bg-black">
+    Васильев Кирилл Александрович 221-365
+  </footer>
+  <div id="orderButtons" class="none">
+    <svg id="viewOrderButton" data-bs-toggle="modal" data-bs-target="#viewModal" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+    </svg>
+    <svg id="editOrderButton" data-bs-toggle="modal" data-bs-target="#editModal" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+    </svg>
+    <svg id="deleteOrderButton" data-bs-toggle="modal" data-bs-target="#deleteModal" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+    </svg>
+  </div>
+
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="showModalLabel">Просмотр</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                  <div class="col-3">
+                      <label for="guideFullName" class="form-label">ФИО гида:</label>
+                  </div>
+                  <div class="col-9">
+                      <input type="text" class="form-control" id="guideFullName" readonly>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                      <label for="routeName" class="form-label">Название маршрута:</label>
+                  </div>
+                  <div class="col-9">
+                      <input type="text" class="form-control" id="routeName" readonly>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                      <label for="orderDate" class="form-label">Дата экскурсии:</label>
+                  </div>
+                  <div class="col-9">
+                      <input type="date" class="form-control" id="orderDate" min="2024-01-01" readonly>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                      <label for="startTime" class="form-label">Время начала:</label>
+                  </div>
+                  <div class="col-9">
+                      <input type="time" class="form-control" id="startTime" min="09:00" max="23:00" step="1800" readonly>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="orderDuration" class="form-label">Длительность экскурсии:</label>
+                  </div>
+                  <div class="col-9">
+                    <select class="form-control" id="orderDuration" readonly>
+                      <option value="1">1 час</option>
+                      <option value="2">2 часа</option>
+                      <option value="3">3 часа</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                      <label for="personsCount" class="form-label">Количество человек в группе:</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="number" class="form-control" id="personsCount" min="1" max="20" readonly>
+                  </div>
+                </div>
+                <div id='additionsBlock'>
+                  <h2>Дополнительные опции:</h2>
+                  <ul>
+                    <li id='firstAddition'>
+                      <strong>Скидка для школьников и студентов</strong>
+                      <p>Скидка предоставляется только для школьников и студентов. Не забудьте взять удостоверения подтверждающие статус.</p>
+                      <p class='text-danger'>-15 %</p>
+                    </li>
+                    <li id='secondAddition'>
+                      <strong>Тематические сувениры для посетителей</strong>
+                      <p>Стоимость увеличивается на 500 рублей для каждого посетителя.</p>
+                      <p class='text-danger' id='priceInput'></p>
+                    </li>
+                  </ul>
+                <div class="row mb-3">
+                  <div class="col-5">
+                    <label for="orderDuration" class="form-label">Итоговая стоимость:</label>
+                  </div>
+                  <div class="col-7">
+                    <strong id='price'>Невозможно определить.</strong>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="showModalLabel">Редактирование</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+              <div class="col-3">
+                <label for="guideFullName" class="form-label">ФИО гида:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" class="form-control" id="guideFullName" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+            <div class="col-3">
+                <label for="routeName" class="form-label">Название маршрута:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" class="form-control" id="routeName" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="orderDate" class="form-label">Дата экскурсии:</label>
+              </div>
+              <div class="col-9">
+                <input type="date" class="form-control" id="orderDate" min="2024-01-01" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="startTime" class="form-label">Время начала:</label>
+              </div>
+              <div class="col-9">
+                <input type="time" class="form-control" id="startTime" min="09:00" max="23:00" step="1800" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="orderDuration" class="form-label">Длительность экскурсии:</label>
+              </div>
+              <div class="col-9">
+                <select class="form-control" id="orderDuration" >
+                  <option value="1">1 час</option>
+                  <option value="2">2 часа</option>
+                  <option value="3">3 часа</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="personsCount" class="form-label">Количество человек в группе:</label>
+              </div>
+              <div class="col-9">
+                <input type="number" class="form-control" id="personsCount" min="1" max="20">
+              </div>
+            </div>
+            <div id='additionsBlock'>
+              <h2>Дополнительные опции:</h2>
+              <div class="row mb-3">
+                <div class="col-1">
+                  <input id="isStudent" type="checkbox" />
+                </div>
+                <div class="col-11">
+                  <label for="isStudent" class="form-label">
+                    <strong>Скидка для школьников и студентов</strong>
+                    <p>Скидка предоставляется только для школьников и студентов. Не забудьте взять удостоверения подтверждающие статус.</p>
+                    <p class='text-danger'>-15 %</p>
+                  </label>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-1">
+                  <input id="isExtra" type="checkbox" />
+                </div>
+                <div class="col-11">
+                  <label for="isExtra"class="form-label">
+                    <strong>Тематические сувениры для посетителей</strong>
+                    <p>Стоимость увеличивается на 500 рублей для каждого посетителя.</p>
+                    <p class='text-danger' id='priceInput'></p>
+                  </label>
+                </div>
+              </div>
+            <div class="row mb-3">
+              <div class="col-5">
+                <label for="orderDuration" class="form-label">Итоговая стоимость:</label>
+              </div>
+              <div class="col-7">
+                <strong id='price'>Невозможно определить.</strong>
+              </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button id="sendData" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Отправить</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div id="deleteModal" class="modal fade"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="removeModalLabel">Удаление задачи</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить задачу <span id="removeNameTask"></span>?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+              <button type="button" class="btn btn-primary" id="removeModalBtn" data-bs-dismiss="modal">Да</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  <script src="./homepage.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
